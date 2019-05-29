@@ -10,27 +10,48 @@ class Robot extends Enemy{
   float speed = 2f; 
 
    void display(){
-    direction = (speed >0)? RIGHT : LEFT;
+     
+    if(speed >0){
+      direction = RIGHT;
+    }else if(speed <0){
+      direction = LEFT;
+    }else{
+      if(player.x < x){
+      direction = LEFT;
+      }else{
+      direction = RIGHT;
+      }
+    }
+   
+    
     pushMatrix();
     translate(x+w,y);
     if(direction == RIGHT){
       scale(1,1);
-      image(dinosaur,-w,0,w,h);
+      image(robot,-w,0,w,h);
     }else{
       scale(-1,1);
-      image(dinosaur,0,0,w,h);
+      image(robot,0,0,w,h);
     }
     popMatrix();
   }
   
   void update(){
     direction = (speed >0)? RIGHT : LEFT;
-    
     x += speed;
     
     if(x > width-w || x < 0){
       speed*=-1;
     }
+    
+    if(player.y >= y - (PLAYER_DETECT_RANGE_ROW * w) && player.y <= y + (PLAYER_DETECT_RANGE_ROW * w)){
+      if(speed == 2f && player.x > x){
+      speed = 0;
+      }else if(speed == -2f && player.x < x){
+      speed = 0;
+      }
+    }else{
+      speed = (speed > 0)? 2f:-2f; }
     
     
   }
