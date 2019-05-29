@@ -6,8 +6,8 @@ class Robot extends Enemy{
 	final int HAND_OFFSET_Y = 37;
 	final int HAND_OFFSET_X_FORWARD = 64;
 	final int HAND_OFFSET_X_BACKWARD = 16;
-  int direction;
-  float speed = 2f; 
+  	int direction;
+  	float speed = 2f; 
 
    void display(){
      
